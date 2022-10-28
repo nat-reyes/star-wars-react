@@ -47,8 +47,12 @@ function Table({
         <StyledTable>
           <thead>
             <tr>
-              {columns.map((column, idx) => (
-                <th key={idx} width={column?.width}>
+              {columns.map((column) => (
+                <th
+                  key={column?.index}
+                  data-test-id={column?.index}
+                  width={column?.width}
+                >
                   {column?.Header || "no data"}
                 </th>
               ))}

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import defaultTheme from "../../styles/commons";
 
 export const NavbarStyled = styled.nav`

@@ -33,11 +33,19 @@ function Pagination({ onPageChange, pagination }) {
     <Wrapper>
       <Page>
         <ArrowContainer disabled={previousIsDisabled}>
-          <ArrowLeft onClick={previousPage} disabled={previousIsDisabled} />
+          <ArrowLeft
+            data-test-id="go-to-previous-page"
+            onClick={previousPage}
+            disabled={previousIsDisabled}
+          />
         </ArrowContainer>
-        <PageDisplay>{`Page: ${page}`}</PageDisplay>
+        <PageDisplay data-test-id="page-number">{`Page: ${page}`}</PageDisplay>
         <ArrowContainer disabled={nextIsDisabled}>
-          <ArrowRight onClick={nextPage} disabled={nextIsDisabled} />
+          <ArrowRight
+            data-test-id="go-to-next-page"
+            onClick={nextPage}
+            disabled={nextIsDisabled}
+          />
         </ArrowContainer>
       </Page>
     </Wrapper>
