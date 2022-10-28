@@ -46,8 +46,34 @@ describe("Characters Table", () => {
     cy.visit(`http://localhost:3000`);
     cy.get('[data-test-id="go-to-previous-page"]').click();
   });
-  it("Should has the correct columns", () => {
+  it("Should has the correct columns name and position", () => {
     cy.visit(`http://localhost:3000`);
-    cy.get('[data-test-id="go-to-previous-page"]').click();
+    cy.get('tr>th').each(($el, index, $list) => {
+      console.log($el[0]);
+      if($el[0].cellIndex === 0) {
+        expect($el[0].dataset['testId']).to.have.string("name")
+      }
+      if($el[0].cellIndex === 1) {
+        expect($el[0].dataset['testId']).to.have.string("height")
+      }
+      if($el[0].cellIndex === 2) {
+        expect($el[0].dataset['testId']).to.have.string("hair_color")
+      }
+      if($el[0].cellIndex === 3) {
+        expect($el[0].dataset['testId']).to.have.string("eye_color")
+      }
+      if($el[0].cellIndex === 4) {
+        expect($el[0].dataset['testId']).to.have.string("birth_year")
+      }
+      if($el[0].cellIndex === 5) {
+        expect($el[0].dataset['testId']).to.have.string("gender")
+      }
+      if($el[0].cellIndex === 6) {
+        expect($el[0].dataset['testId']).to.have.string("homeworld")
+      }
+      if($el[0].cellIndex === 7) {
+        expect($el[0].dataset['testId']).to.have.string("starship")
+      }
+    })
   });
 });
