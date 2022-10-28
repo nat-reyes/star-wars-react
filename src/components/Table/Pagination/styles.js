@@ -1,7 +1,8 @@
-import styled from "styled-components";
-import defaultTheme from "../../../styles/commons";
 import { ArrowCircleLeft } from "@styled-icons/evaicons-solid/ArrowCircleLeft";
 import { ArrowCircleRight } from "@styled-icons/evaicons-solid/ArrowCircleRight";
+import styled from "styled-components";
+
+import defaultTheme from "../../../styles/commons";
 
 export const ArrowLeft = styled(ArrowCircleLeft)``;
 

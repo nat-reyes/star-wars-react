@@ -1,14 +1,14 @@
+import PropTypes from "prop-types";
+
+import Pagination from "./Pagination";
 import {
   Container,
-  TableWrapper,
   StyledTable,
   Loading,
   SpinnerLoading,
   NoDataWrapper,
   NoData,
 } from "./styles";
-import PropTypes from "prop-types";
-import Pagination from "./Pagination";
 
 function Table({
   columns,
@@ -25,7 +25,7 @@ function Table({
     if (itNeedsRequest) {
       if (Array.isArray(fieldValue)) {
         return fieldValue?.length
-          ? fieldValue.map((field) => request(field))
+          ? fieldValue.map((field) => request(field, true))
           : "no data";
       }
       return request(fieldValue);
@@ -55,7 +55,7 @@ function Table({
             </tr>
           </thead>
           <tbody>
-            {data?.length &&
+            {!!data?.length &&
               data.map((item, idx) => {
                 return (
                   <tr key={idx}>

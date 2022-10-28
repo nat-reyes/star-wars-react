@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-
-import Table from "../../components/Table";
-import { storagePlanet } from "../../reducers/Planets/PlanetsSlice";
-import { planetsSelector } from "../../reducers/Planets/PlanetsSlice";
-import { storageStarship } from "../../reducers/Starships/StarshipsSlice";
-import { starshipSelector } from "../../reducers/Starships/StarshipsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { Table } from "../../components";
+import {
+  storagePlanet,
+  planetsSelector,
+} from "../../reducers/Planets/PlanetsSlice";
+import {
+  storageStarship,
+  starshipSelector,
+} from "../../reducers/Starships/StarshipsSlice";
 import { requestCharacters } from "../../services/charactersService";
 import { requestPlanetDetails } from "../../services/planetsService";
 import { requestStarshipDetails } from "../../services/starshipsService";
@@ -25,8 +27,6 @@ function CharactersTable() {
   });
   const { planets } = useSelector(planetsSelector);
   const { starships } = useSelector(starshipSelector);
-
-  console.log(starships);
 
   const [query, setQuery] = useState({ page: 1 });
   const [isLoading, setIsLoading] = useState(false);
@@ -58,23 +58,29 @@ function CharactersTable() {
     return planets?.find((planet) => planet?.url === url)?.name;
   };
 
-  const fetchStarship = (url) => {
+  const fetchStarship = (url, isArray) => {
     const starshipStored = starships?.find((starship) => starship?.url === url);
+    const starshipColumnValue = `${starshipStored?.model} - ${starshipStored?.manufacturer}`;
+
+    const starshipLineBreak = () => (
+      <>
+        - {starshipColumnValue}
+        <br />
+      </>
+    );
 
     if (starshipStored) {
-      return `${starshipStored?.model} - ${starshipStored?.manufacturer}`;
+      return isArray ? starshipLineBreak() : starshipColumnValue;
     }
 
     requestStarshipDetails(url, dispatchStarshipRequest);
 
-    const newStarship = starships?.find((starship) => starship?.url === url);
-    return `${newStarship?.model} - ${newStarship?.manufacturer}`;
+    return isArray ? starshipLineBreak() : starshipColumnValue;
   };
 
   const onPageChange = (pageNumber) => setQuery({ ...query, page: pageNumber });
   const onFilterTable = (characterName) => setQuery({ search: characterName });
-  // voy a necesitar aplicar redux para hacer storage de la data que traiga de planets y asi no repetir request
-  // revisar los request si estan haciendose de mas
+
   return (
     <div style={{ marginTop: "1rem", padding: "1rem" }}>
       <TableTitle> STAR WARS CHARACTERS</TableTitle>

@@ -1,6 +1,7 @@
-import styled from "styled-components";
-import defaultTheme from "../../styles/commons";
 import { Spinner } from "@styled-icons/fa-solid/Spinner";
+import styled from "styled-components";
+
+import defaultTheme from "../../styles/commons";
 
 export const SpinnerLoading = styled(Spinner)`
   height: 24px;
@@ -43,7 +44,7 @@ export const StyledTable = styled.table`
   tbody {
     border-bottom: 1px solid ${({ theme }) => theme.colors.textOnBackground};
     tr {
-      background: ${({ theme }) => theme.colors.cardBackground};
+      background: ${({ theme }) => theme.colors.backgroundWhite};
       td {
         border: 0px;
         height: 50px;
@@ -60,8 +61,10 @@ export const Loading = styled.div`
   flex-direction: row;
   justify-content: center;
   margin-top: 8rem;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.backgroundWhite};
 `;
+
+Loading.defaultProps = { theme: defaultTheme };
 
 export const NoData = styled.span`
   background-color: ${({ theme }) => theme.colors.background};

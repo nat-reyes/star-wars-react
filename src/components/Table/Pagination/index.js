@@ -1,4 +1,7 @@
+import { useState } from "react";
+
 import PropTypes from "prop-types";
+
 import {
   Wrapper,
   Page,
@@ -7,7 +10,6 @@ import {
   ArrowRight,
   ArrowContainer,
 } from "./styles";
-import { useState } from "react";
 
 function Pagination({ onPageChange, pagination }) {
   const { page, pageCount, pageSize } = pagination;

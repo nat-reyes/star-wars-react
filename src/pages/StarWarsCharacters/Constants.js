@@ -31,7 +31,7 @@ export const tableCharactersColumns = (fetchPlanet, fetchStarship) => [
   {
     Header: "Starships",
     index: "starships",
-    request: (url) => fetchStarship(url),
+    request: (url, isArray) => fetchStarship(url, isArray),
     width: "300px",
   },
 ];
