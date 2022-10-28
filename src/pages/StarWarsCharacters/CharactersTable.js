@@ -18,6 +18,7 @@ import {
   FilterContainer,
   StyledSpan,
   InputContainer,
+  InputStyled,
 } from "./styles";
 
 function CharactersTable() {
@@ -89,7 +90,7 @@ function CharactersTable() {
           <span> Character: </span>
         </StyledSpan>
         <InputContainer>
-          <input
+          <InputStyled
             onChange={(value) => onFilterTable(value?.target?.value)}
             type="text"
             id="character-name"
