@@ -1,4 +1,4 @@
-export const tableCharactersColumns = () => [
+export const tableCharactersColumns = (fetchPlanet, fetchStarship) => [
   {
     Header: "Name",
     index: "name",
@@ -26,10 +26,12 @@ export const tableCharactersColumns = () => [
   {
     Header: "Planet",
     index: "homeworld",
+    request: (url) => fetchPlanet(url),
   },
   {
     Header: "Starships",
-    index: "starship",
-    data: "model and manufacturer",
+    index: "starships",
+    request: (url) => fetchStarship(url),
+    width: "300px",
   },
 ];

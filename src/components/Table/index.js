@@ -1,21 +1,56 @@
-import { Container, TableWrapper, StyledTable } from "./styles";
+import {
+  Container,
+  TableWrapper,
+  StyledTable,
+  Loading,
+  SpinnerLoading,
+  NoDataWrapper,
+  NoData,
+} from "./styles";
 import PropTypes from "prop-types";
-function Table({ columns, data, manual, pageCount }) {
-  const getItemValue = (item, columnName) => item[columnName];
+import Pagination from "./Pagination";
 
-  const renderFieldData = (item) =>
-    columns.map((column, idx) => (
-      <td key={idx}> {getItemValue(item, column?.index)}</td>
-    ));
+function Table({
+  columns,
+  data = [],
+  onPageChange,
+  pagination,
+  isLoading,
+  noData,
+}) {
+  const getItemValue = (item, columnName, request) => {
+    const fieldValue = item[columnName];
+
+    const itNeedsRequest = request && fieldValue;
+    if (itNeedsRequest) {
+      if (Array.isArray(fieldValue)) {
+        return fieldValue?.length
+          ? fieldValue.map((field) => request(field))
+          : "no data";
+      }
+      return request(fieldValue);
+    }
+
+    return item[columnName];
+  };
+
+  const shouldShowPagination = data?.length && pagination?.page && !isLoading;
 
   return (
     <Container>
-      <TableWrapper>
+      {isLoading && (
+        <Loading>
+          <SpinnerLoading />
+        </Loading>
+      )}
+      {!isLoading && (
         <StyledTable>
           <thead>
             <tr>
               {columns.map((column, idx) => (
-                <th key={idx}>{column?.Header || "no data"}</th>
+                <th key={idx} width={column?.width}>
+                  {column?.Header || "no data"}
+                </th>
               ))}
             </tr>
           </thead>
@@ -25,14 +60,24 @@ function Table({ columns, data, manual, pageCount }) {
                 return (
                   <tr key={idx}>
                     {columns.map((column, idx) => (
-                      <td key={idx}>{getItemValue(item, column?.index)}</td>
+                      <td key={idx}>
+                        {getItemValue(item, column?.index, column?.request)}
+                      </td>
                     ))}
                   </tr>
                 );
               })}
           </tbody>
         </StyledTable>
-      </TableWrapper>
+      )}
+      {!isLoading && noData && (
+        <NoDataWrapper>
+          <NoData>No data</NoData>
+        </NoDataWrapper>
+      )}
+      {!!shouldShowPagination && (
+        <Pagination onPageChange={onPageChange} pagination={pagination} />
+      )}
     </Container>
   );
 }

@@ -1,5 +1,11 @@
 import styled from "styled-components";
 import defaultTheme from "../../styles/commons";
+import { Spinner } from "@styled-icons/fa-solid/Spinner";
+
+export const SpinnerLoading = styled(Spinner)`
+  height: 24px;
+  width: 24px;
+`;
 
 export const Container = styled.div`
   background: ${({ theme }) => theme.colors.background};
@@ -20,12 +26,12 @@ export const StyledTable = styled.table`
     width: 20%;
     tr {
       box-shadow: none;
-      background: ${({ theme }) => theme.colors.foreground};
-      border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
+      background: ${({ theme }) => theme.colors.secondary};
+      border-bottom: 1px solid ${({ theme }) => theme.colors.textOnBackground};
       th {
         border-right: 0px;
         text-align: start;
-        color: ${({ theme }) => theme.colors.secondaryText};
+        color: ${({ theme }) => theme.colors.textOnSecondary};
         height: 30px;
         user-select: none;
         position: relative;
@@ -35,7 +41,7 @@ export const StyledTable = styled.table`
   }
 
   tbody {
-    border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.textOnBackground};
     tr {
       background: ${({ theme }) => theme.colors.cardBackground};
       td {
@@ -48,3 +54,29 @@ export const StyledTable = styled.table`
 `;
 
 StyledTable.defaultProps = { theme: defaultTheme };
+
+export const Loading = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 8rem;
+  background-color: white;
+`;
+
+export const NoData = styled.span`
+  background-color: ${({ theme }) => theme.colors.background};
+  padding: 10px 20px;
+  margin: 20px 0px;
+  max-width: 125px;
+  text-align: center;
+`;
+
+NoData.defaultProps = { theme: defaultTheme };
+
+export const NoDataWrapper = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 120px;
+`;
