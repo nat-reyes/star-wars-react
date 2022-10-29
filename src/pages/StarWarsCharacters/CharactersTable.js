@@ -24,6 +24,8 @@ import {
   InputContainer,
   InputStyled,
   SelectStyled,
+  Loading,
+  SpinnerLoading,
 } from "./styles";
 
 function CharactersTable() {
@@ -84,12 +86,10 @@ function CharactersTable() {
   const onPageChange = (pageNumber) => setQuery({ ...query, page: pageNumber });
   const onSearchQuery = (characterName) => setQuery({ search: characterName });
   const onFilterTable = (field, value) => {
-    console.log(field, value);
     if (value === "all") return setCharacters(results);
     const filteredCharacters = results?.filter(
       (character) => character[field] === value
     );
-    console.log(filteredCharacters);
     setCharacters(filteredCharacters);
   };
   return (
@@ -125,18 +125,24 @@ function CharactersTable() {
           </SelectStyled>
         </InputContainer>
       </FilterContainer>
-      <Table
-        isLoading={isLoading}
-        noData={noData}
-        columns={tableCharactersColumns(fetchPlanet, fetchStarship)}
-        data={characters}
-        onPageChange={onPageChange}
-        pagination={{
-          pageCount: count,
-          page: query?.page,
-          pageSize: 10,
-        }}
-      />
+      {isLoading && (
+        <Loading>
+          <SpinnerLoading />
+        </Loading>
+      )}
+      {!isLoading && (
+        <Table
+          noData={noData}
+          columns={tableCharactersColumns(fetchPlanet, fetchStarship)}
+          data={characters}
+          onPageChange={onPageChange}
+          pagination={{
+            pageCount: count,
+            page: query?.page,
+            pageSize: 10,
+          }}
+        />
+      )}
     </div>
   );
 }

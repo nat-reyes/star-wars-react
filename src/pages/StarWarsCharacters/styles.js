@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import defaultTheme from "../../styles/commons";
+import { Spinner } from "@styled-icons/fa-solid/Spinner";
 
 export const TableTitle = styled.h1`
   font-family: Copperplate, Papyrus, fantasy;
@@ -51,4 +53,19 @@ export const SelectStyled = styled.select`
     min-height: 20px;
     padding: 0px 2px 1px;
   }
+`;
+
+export const Loading = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 8rem;
+  background-color: ${({ theme }) => theme.colors.backgroundWhite};
+`;
+
+Loading.defaultProps = { theme: defaultTheme };
+
+export const SpinnerLoading = styled(Spinner)`
+  height: 24px;
+  width: 24px;
 `;

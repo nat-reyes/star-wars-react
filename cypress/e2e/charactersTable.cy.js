@@ -49,7 +49,7 @@ describe("Characters Table", () => {
   it("Should has the correct columns name and position", () => {
     cy.visit(`http://localhost:3000`);
     cy.get('tr>th').each(($el, index, $list) => {
-      console.log($el[0]);
+
       if($el[0].cellIndex === 0) {
         expect($el[0].dataset['testId']).to.have.string("name")
       }

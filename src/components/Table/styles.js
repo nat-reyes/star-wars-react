@@ -1,12 +1,5 @@
-import { Spinner } from "@styled-icons/fa-solid/Spinner";
 import styled from "styled-components";
-
 import defaultTheme from "../../styles/commons";
-
-export const SpinnerLoading = styled(Spinner)`
-  height: 24px;
-  width: 24px;
-`;
 
 export const Container = styled.div`
   background: ${({ theme }) => theme.colors.background};

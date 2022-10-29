@@ -12,7 +12,6 @@ export const peopleSlice = createSlice({
   },
   reducers: {
     storagePeople: (state, { payload }) => {
-      console.log(payload);
       state.people = payload;
     },
   },

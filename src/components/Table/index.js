@@ -1,29 +1,13 @@
 import PropTypes from "prop-types";
-
+import React, { useMemo } from "react";
 import Pagination from "./Pagination";
-import {
-  Container,
-  StyledTable,
-  Loading,
-  SpinnerLoading,
-  NoDataWrapper,
-  NoData,
-} from "./styles";
-import { capitalize } from "../../utils/formatFields";
+import { Container, StyledTable, NoDataWrapper, NoData } from "./styles";
 
-function Table({
-  columns,
-  data = [],
-  onPageChange,
-  pagination,
-  isLoading,
-  noData,
-}) {
+function Table({ columns, data = [], onPageChange, pagination, noData }) {
   const getItemValue = (item, columnName, request, render) => {
     const fieldValue = item[columnName];
-
     const itNeedsRequest = request && fieldValue;
-    console.log(render);
+
     if (itNeedsRequest) {
       if (Array.isArray(fieldValue)) {
         return fieldValue?.length
@@ -40,52 +24,45 @@ function Table({
     return render ? render(item[columnName]) : "No data";
   };
 
-  const shouldShowPagination = data?.length && pagination?.page && !isLoading;
+  const shouldShowPagination = data?.length && pagination?.page;
 
   return (
     <Container>
-      {isLoading && (
-        <Loading>
-          <SpinnerLoading />
-        </Loading>
-      )}
-      {!isLoading && (
-        <StyledTable>
-          <thead>
-            <tr>
-              {columns.map((column) => (
-                <th
-                  key={column?.index}
-                  data-test-id={column?.index}
-                  width={column?.width}
-                >
-                  {column?.Header || "no data"}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {!!data?.length &&
-              data.map((item, idx) => {
-                return (
-                  <tr key={idx}>
-                    {columns.map((column, idx) => (
-                      <td key={idx}>
-                        {getItemValue(
-                          item,
-                          column?.index,
-                          column?.request,
-                          column?.render
-                        )}
-                      </td>
-                    ))}
-                  </tr>
-                );
-              })}
-          </tbody>
-        </StyledTable>
-      )}
-      {!isLoading && noData && (
+      <StyledTable>
+        <thead>
+          <tr>
+            {columns.map((column) => (
+              <th
+                key={column?.index}
+                data-test-id={column?.index}
+                width={column?.width}
+              >
+                {column?.Header || "no data"}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {!!data?.length &&
+            data.map((item) => {
+              return (
+                <tr key={item?.url}>
+                  {columns.map((column) => (
+                    <td key={column?.index}>
+                      {getItemValue(
+                        item,
+                        column?.index,
+                        column?.request,
+                        column?.render
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+        </tbody>
+      </StyledTable>
+      {noData && (
         <NoDataWrapper>
           <NoData>No data</NoData>
         </NoDataWrapper>
@@ -101,4 +78,4 @@ Table.defaultProps = {
   columns: PropTypes.arrayOf(PropTypes.shape({})),
   data: PropTypes.arrayOf(PropTypes.shape({})),
 };
-export default Table;
+export default React.memo(Table);
