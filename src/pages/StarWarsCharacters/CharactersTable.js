@@ -62,31 +62,23 @@ function CharactersTable() {
     const planetStored = planets?.find((planet) => planet?.url === url);
 
     if (planetStored) {
-      return planetStored?.name;
+      return planetStored;
     }
 
     requestPlanetDetails(url, dispatchPlanetRequest);
-    return planets?.find((planet) => planet?.url === url)?.name;
+    return planetStored;
   };
 
-  const fetchStarship = (url, isArray) => {
+  const fetchStarship = (url) => {
     const starshipStored = starships?.find((starship) => starship?.url === url);
-    const starshipColumnValue = `${starshipStored?.model} - ${starshipStored?.manufacturer}`;
-
-    const starshipLineBreak = () => (
-      <>
-        - {starshipColumnValue}
-        <br />
-      </>
-    );
 
     if (starshipStored) {
-      return isArray ? starshipLineBreak() : starshipColumnValue;
+      return starshipStored;
     }
 
     requestStarshipDetails(url, dispatchStarshipRequest);
 
-    return isArray ? starshipLineBreak() : starshipColumnValue;
+    return starshipStored;
   };
 
   const onPageChange = (pageNumber) => setQuery({ ...query, page: pageNumber });
@@ -126,6 +118,7 @@ function CharactersTable() {
           >
             <option value="male">Male</option>
             <option value="female">Female</option>
+            <option value="none">None</option>
             <option value="all" selected>
               All
             </option>

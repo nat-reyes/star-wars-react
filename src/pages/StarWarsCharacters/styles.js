@@ -37,7 +37,7 @@ export const InputStyled = styled.input`
 `;
 
 export const SelectStyled = styled.select`
-  height: 1.5rem;
+  height: 1.6rem;
   padding: 0.2rem;
   width: 8rem;
   border: 1px solid black;

@@ -19,20 +19,25 @@ function Table({
   isLoading,
   noData,
 }) {
-  const getItemValue = (item, columnName, request) => {
+  const getItemValue = (item, columnName, request, render) => {
     const fieldValue = item[columnName];
 
     const itNeedsRequest = request && fieldValue;
+    console.log(render);
     if (itNeedsRequest) {
       if (Array.isArray(fieldValue)) {
         return fieldValue?.length
-          ? fieldValue.map((field) => request(field, true))
+          ? fieldValue.map((field) => {
+              const cellValue = request(field);
+              return render ? render(cellValue) : "no data";
+            })
           : "No data";
       }
-      return request(fieldValue);
+      const cellValue = request(fieldValue);
+      return render ? render(cellValue) : "No data";
     }
 
-    return capitalize(item[columnName]);
+    return render ? render(item[columnName]) : "No data";
   };
 
   const shouldShowPagination = data?.length && pagination?.page && !isLoading;
@@ -66,7 +71,12 @@ function Table({
                   <tr key={idx}>
                     {columns.map((column, idx) => (
                       <td key={idx}>
-                        {getItemValue(item, column?.index, column?.request)}
+                        {getItemValue(
+                          item,
+                          column?.index,
+                          column?.request,
+                          column?.render
+                        )}
                       </td>
                     ))}
                   </tr>
