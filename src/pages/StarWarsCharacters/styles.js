@@ -35,3 +35,20 @@ export const InputStyled = styled.input`
   border: 1px solid black;
   border-radius: 0.2rem;
 `;
+
+export const SelectStyled = styled.select`
+  height: 1.5rem;
+  padding: 0.2rem;
+  width: 8rem;
+  border: 1px solid black;
+  border-radius: 0.2rem;
+  font-size: 0.9rem;
+  option {
+    color: black;
+    background: white;
+    display: flex;
+    white-space: pre;
+    min-height: 20px;
+    padding: 0px 2px 1px;
+  }
+`;

@@ -9,6 +9,7 @@ import {
   NoDataWrapper,
   NoData,
 } from "./styles";
+import { capitalize } from "../../utils/formatFields";
 
 function Table({
   columns,
@@ -26,12 +27,12 @@ function Table({
       if (Array.isArray(fieldValue)) {
         return fieldValue?.length
           ? fieldValue.map((field) => request(field, true))
-          : "no data";
+          : "No data";
       }
       return request(fieldValue);
     }
 
-    return item[columnName];
+    return capitalize(item[columnName]);
   };
 
   const shouldShowPagination = data?.length && pagination?.page && !isLoading;

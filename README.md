@@ -13,7 +13,7 @@ The <Table/ > can be easily reused.
 **Clone repository**
 
 ```
-git clone https://github.com/Jobsity/jtalent.web.git
+git clone https://github.com/nat-reyes/star-wars-react.git
 ```
 
 **Install dependencies**

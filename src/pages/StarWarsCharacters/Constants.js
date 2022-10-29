@@ -2,10 +2,15 @@ export const tableCharactersColumns = (fetchPlanet, fetchStarship) => [
   {
     Header: "Name",
     index: "name",
+    render: (value) => value,
   },
   {
     Header: "Height",
     index: "height",
+  },
+  {
+    Header: "Weight",
+    index: "mass",
   },
   {
     Header: "Hair Color",
