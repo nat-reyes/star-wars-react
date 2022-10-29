@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# Star Wars Characters App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project request from the [STAR-WARS-API](https://swapi.dev/) the star wars characters in a styled table.
+This table allows pagination to easily move between different characters page request.
+Also, it includes a filter to search for characters.
 
+The project is storing the planets and starships data with Redux with the objective to avoid extra request. Instead, it searches inside the Redux if the information already exist to show it.
+
+The <Table/ > can be easily reused.
+
+## Get Started
+
+**Clone repository**
+
+```
+git clone https://github.com/Jobsity/jtalent.web.git
+```
+
+**Install dependencies**
+```
+npm install
+```
+
+**Start development server**
+
+```
+npm start
+```
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+`npm start` Starts development server.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+`npm run tests` Runs tests.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+`npm run lint` Runs lint . fix command to clean the project files with the linter configuration.
 
-### `npm test`
+`npm run cypress` Runs cypress.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies
 
-### `npm run build`
+**React**
+-  is a free and open-source front-end JavaScript library for building user interfaces based on UI components.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Redux**
+- You can use [Redux Devtools's extension](https://github.com/zalmoxisus/redux-devtools-extension).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Styled-Components**
+- You can see [Styled-Components](https://styled-components.com/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Cypress**
+- For e2e testing. [Cypress](https://www.cypress.io/)
 
-### `npm run eject`
+**Eslint && Prettier**
+- For formatting the project files.
+- [Eslint.js](https://eslint.org/)
+- [Prettier.js](https://prettier.io/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
