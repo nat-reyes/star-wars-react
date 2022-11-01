@@ -9,12 +9,14 @@ export const tableCharactersColumns = (fetchPlanet, fetchStarship) => [
   {
     Header: "Height",
     index: "height",
-    render: (value) => metersToCm(value),
+    render: (value) => (value !== "unknown" ? metersToCm(value) : "Unknown"),
   },
   {
     Header: "Weight",
     index: "mass",
-    render: (value) => `${value} kg`,
+    render: (value) => {
+      return value !== "unknown" ? `${value} kg` : "Unknown";
+    },
   },
   {
     Header: "Hair Color",

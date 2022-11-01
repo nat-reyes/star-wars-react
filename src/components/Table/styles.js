@@ -4,6 +4,7 @@ import defaultTheme from "../../styles/commons";
 export const Container = styled.div`
   background: ${({ theme }) => theme.colors.background};
   border: 0px;
+  overflow-x: scroll;
 `;
 
 Container.defaultProps = {

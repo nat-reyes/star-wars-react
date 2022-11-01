@@ -1,10 +1,9 @@
 # Star Wars Characters App
 
-This project request from the [STAR-WARS-API](https://swapi.dev/) the star wars characters in a styled table.
-This table allows pagination to easily move between different characters page request.
-Also, it includes a filter to search for characters.
+This project requests from the [STAR-WARS-API](https://swapi.dev/) the star wars characters.
+The project has a styled table to show the character requests. This table allows pagination to quickly move between different characters' page requests. Also, it includes a filter to search for characters and another one to filter characters by gender.
 
-The project is storing the planets and starships data with Redux with the objective to avoid extra request. Instead, it searches inside the Redux if the information already exist to show it.
+The project is storing data with Redux with the objective of avoiding extra requests. Instead, it searches inside the Redux if the information already exists to show it.
 
 The <Table/ > can be easily reused.
 

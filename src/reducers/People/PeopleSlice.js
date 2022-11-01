@@ -19,7 +19,6 @@ export const peopleSlice = createSlice({
       const { characterId } = payload;
 
       let peopleToUpdate = JSON.parse(JSON.stringify(state.people));
-      console.log({ payload });
       if (!peopleToUpdate.results.find((item) => item?.url === characterId)) {
         return state;
       }
@@ -40,10 +39,16 @@ export const peopleSlice = createSlice({
       };
     },
     updateCharacterFieldState: (state, { payload }) => {
-      const { url } = payload;
+      const { url, clean } = payload;
       const stateIsSearching = JSON.parse(JSON.stringify(state.isSearching));
       const exist = stateIsSearching.find((item) => item?.itemId === url);
 
+      if (clean) {
+        return {
+          ...state,
+          isSearching: [],
+        };
+      }
       if (exist) {
         return state;
       }

@@ -3,6 +3,15 @@ import React from "react";
 import Pagination from "./Pagination";
 import { Container, StyledTable, NoDataWrapper, NoData } from "./styles";
 
+/**
+ * Table component
+ * @param columns
+ * @param data
+ * @param onPageChange
+ * @param pagination
+ * @param noData
+ * @param isSearching
+ */
 function Table({
   columns,
   data = [],
