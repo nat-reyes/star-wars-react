@@ -39,21 +39,22 @@ export const tableCharactersColumns = (fetchPlanet, fetchStarship) => [
   {
     Header: "Planet",
     index: "homeworld",
-    request: (url) => fetchPlanet(url),
-    render: (value) => (value ? value?.name : "No data"),
+    request: (url, characterId) => fetchPlanet(url, characterId),
+    render: (value) => value || "No data",
   },
   {
     Header: "Starships",
     index: "starships",
-    request: (url) => fetchStarship(url),
+    request: (url, characterId) => fetchStarship(url, characterId),
     width: "300px",
     render: (value) => {
-      const starshipColumnValue = value
+      const starshipColumnValue = value?.url
         ? `${value?.model} - ${value?.manufacturer}`
         : "No data";
       return (
         <>
           - {starshipColumnValue}
+          <br />
           <br />
         </>
       );

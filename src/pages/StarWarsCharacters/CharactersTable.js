@@ -10,13 +10,16 @@ import {
   starshipSelector,
 } from "../../reducers/Starships/StarshipsSlice";
 import {
-  storagePeople,
+  storageCharacter,
   peopleSelector,
+  updateCharacterFieldState,
+  isSearchingSelector,
+  updateCharacter,
 } from "../../reducers/People/PeopleSlice";
 import { requestCharacters } from "../../services/charactersService";
 import { requestPlanetDetails } from "../../services/planetsService";
 import { requestStarshipDetails } from "../../services/starshipsService";
-import { tableCharactersColumns } from "./Constants";
+import { tableCharactersColumns, test } from "./Constants";
 import {
   TableTitle,
   FilterContainer,
@@ -32,11 +35,12 @@ function CharactersTable() {
   const { planets } = useSelector(planetsSelector);
   const { starships } = useSelector(starshipSelector);
   const { people } = useSelector(peopleSelector);
+  const { isSearching } = useSelector(isSearchingSelector);
 
   const { count = 0, results = [] } = people;
 
   const [characters, setCharacters] = useState(results);
-  const [query, setQuery] = useState({ page: 1 });
+  const [query, setQuery] = useState({ page: 3 });
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -51,35 +55,46 @@ function CharactersTable() {
     fetchStarWarsCharacters();
   }, [query]);
 
-  const dispatchPlanetRequest = (data) => dispatch(storagePlanet(data));
+  useEffect(() => {
+    setCharacters(results);
+  }, [results]);
 
-  const dispatchStarshipRequest = (data) => dispatch(storageStarship(data));
+  const dispatchPlanetRequest = (data, params) => {
+    const { characterId } = params;
+    dispatch(storagePlanet(data));
+    dispatch(updateCharacter({ characterId, homeworld: data?.name }));
+  };
+
+  const dispatchStarshipRequest = (data, params) => {
+    const { characterId } = params;
+    dispatch(storageStarship(data));
+    dispatch(updateCharacter({ characterId, starships: data }));
+  };
 
   const dispatchPeopleRequest = (data) => {
-    dispatch(storagePeople(data));
+    dispatch(storageCharacter(data));
     setCharacters(data?.results);
   };
 
-  const fetchPlanet = (url) => {
+  const fetchPlanet = (url, characterId) => {
     const planetStored = planets?.find((planet) => planet?.url === url);
 
     if (planetStored) {
       return planetStored;
     }
-
-    requestPlanetDetails(url, dispatchPlanetRequest);
+    dispatch(updateCharacterFieldState({ url: url }));
+    requestPlanetDetails(url, dispatchPlanetRequest, {}, characterId);
     return planetStored;
   };
 
-  const fetchStarship = (url) => {
+  const fetchStarship = (url, characterId) => {
     const starshipStored = starships?.find((starship) => starship?.url === url);
 
     if (starshipStored) {
       return starshipStored;
     }
-
-    requestStarshipDetails(url, dispatchStarshipRequest);
-
+    dispatch(updateCharacterFieldState({ url: url }));
+    requestStarshipDetails(url, dispatchStarshipRequest, {}, characterId);
     return starshipStored;
   };
 
@@ -92,6 +107,7 @@ function CharactersTable() {
     );
     setCharacters(filteredCharacters);
   };
+
   return (
     <div style={{ marginTop: "1rem", padding: "1rem" }}>
       <TableTitle> STAR WARS CHARACTERS</TableTitle>
@@ -132,6 +148,7 @@ function CharactersTable() {
       )}
       {!isLoading && (
         <Table
+          isSearching={isSearching}
           noData={noData}
           columns={tableCharactersColumns(fetchPlanet, fetchStarship)}
           data={characters}
